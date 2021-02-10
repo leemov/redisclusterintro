@@ -85,10 +85,10 @@ func main() {
 			{
 				Nodes: []redis.ClusterNode{
 					{
-						Addr: ":6379", // master
+						Addr: "172.17.0.2:6379", // master
 					},
 					{
-						Addr: ":6380", // replica
+						Addr: "172.17.0.3:6380", // replica
 					},
 				},
 			},

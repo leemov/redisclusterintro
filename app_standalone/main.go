@@ -88,16 +88,17 @@ func main() {
 		MaxActive:   1000,
 		// Dial or DialContext must be set. When both are set, DialContext takes precedence over Dial.
 		Dial: func() (redis.Conn, error) {
-			c, err := redis.Dial("tcp", "localhost:6379")
+			c, err := redis.Dial("tcp", "172.17.0.2:6379")
 			if err != nil {
+				fmt.Println(err.Error())
 				return nil, err
 			}
 
 			// PASSWORD SETUP
-			// if _, err := c.Do("AUTH", "risktechacademy"); err != nil {
-			// 	c.Close()
-			// 	return nil, err
-			// }
+			if _, err := c.Do("AUTH", "risktechacademy"); err != nil {
+				c.Close()
+				return nil, err
+			}
 
 			return c, nil
 		},
